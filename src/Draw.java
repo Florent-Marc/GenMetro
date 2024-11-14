@@ -1,6 +1,7 @@
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.List;
+import java.util.Map;
 
 public class Draw {
     private static List<Type> types = new java.util.ArrayList<Type>();
@@ -67,4 +68,26 @@ public class Draw {
     public static List<Type> getTypes() {
         return types;
     }
+
+    public static List<RG> rg = new java.util.ArrayList<RG>();
+
+    static {
+        rg.add(new RG(0, 10));
+    }
+
+    public static void drawShape() {
+        //draw a shape with the list of RG
+        File file = new File("src/Map.png");
+        BufferedImage image = new BufferedImage(100, 100, BufferedImage.TYPE_INT_RGB);
+        for (RG rg : rg) {
+            image.setRGB(rg.getX(), rg.getY(), 0x000000);
+        }
+        try {
+            javax.imageio.ImageIO.write(image, "png", file);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
 }
